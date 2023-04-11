@@ -6,7 +6,10 @@ DEVICE = torch.device('cuda' if HAS_CUDA else 'cpu')
 
 parser = argparse.ArgumentParser(description='Simple LLM Finetuner')
 parser.add_argument('--models', nargs='+', default=[
-    'decapoda-research/llama-7b-hf', 
+    'decapoda-research/llama-7b-hf',
+    'decapoda-research/llama-13b-hf',
+    'pinkmanlove/llama-7b-hf',
+    'pinkmanlove/llama-13b-hf',
     'cerebras/Cerebras-GPT-2.7B', 
     'cerebras/Cerebras-GPT-1.3B', 
     'EleutherAI/gpt-neo-2.7B'
