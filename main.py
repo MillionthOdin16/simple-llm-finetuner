@@ -17,6 +17,7 @@ def load_base_model():
     print('Loading base model...')
     model = transformers.LlamaForCausalLM.from_pretrained(
         'decapoda-research/llama-7b-hf',
+        'decapoda-research/llama-13b-hf',
         load_in_8bit=True,
         torch_dtype=torch.float16,
         device_map={'':0}
@@ -26,7 +27,7 @@ def load_tokenizer():
     global tokenizer
     print('Loading tokenizer...')
     tokenizer = transformers.LlamaTokenizer.from_pretrained(
-        'decapoda-research/llama-7b-hf',
+        'pinkmanlove/llama-7b-hf',
     )
 
 def load_peft_model(model_name):
@@ -128,7 +129,7 @@ def tokenize_and_train(
     if (model is None): load_base_model()
     if (tokenizer is None): 
         tokenizer = transformers.LlamaTokenizer.from_pretrained(
-            "decapoda-research/llama-7b-hf", add_eos_token=True
+            "pinkmanlove/llama-7b-hf", add_eos_token=True
         )
 
     assert model is not None
@@ -218,7 +219,7 @@ def tokenize_and_train(
         # The maximum number of checkpoints to keep. When this limit is reached, 
         # the oldest checkpoint will be deleted to save a new one. In this case, 
         # a maximum of 3 checkpoints will be kept.
-        save_total_limit=3,  
+        save_total_limit=5,
     )
 
 
@@ -269,7 +270,7 @@ def training_tab():
             training_text = gr.Textbox(lines=12, label="Training Data", info="Each sequence must be separated by 2 blank lines")
 
             max_seq_length = gr.Slider(
-                minimum=1, maximum=4096, value=512,
+                minimum=1, maximum=4096, value=2048,
                 label="Max Sequence Length", 
                 info="The maximum length of each sample text sequence. Sequences longer than this will be truncated."
             )
