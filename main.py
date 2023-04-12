@@ -17,7 +17,6 @@ def load_base_model():
     print('Loading base model...')
     model = transformers.LlamaForCausalLM.from_pretrained(
         'decapoda-research/llama-7b-hf',
-        'decapoda-research/llama-13b-hf',
         load_in_8bit=True,
         torch_dtype=torch.float16,
         device_map={'':0}
